@@ -1,0 +1,54 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.containerLeft {
+  display: flex;
+  min-height: 100%;
+  background-color: #CC4156;
+  width: 50%;
+}
+
+.image {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.containerRight {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+
+.connexionTitle {
+  margin-top: 169px;
+  font-size: 40px;
+  line-height: 49px;
+  color: #003668;
+}
+
+.button {
+  margin-top: 50px;
+  width: 170px;
+  height: 69px;
+  background-color: #CC4156;
+  color: white;
+  border-radius: 6px;
+}
+
+.label {
+  color: #003668;
+  font-weight: 500;
+  width: 60%;
+}
+
+.input {
+  width: 60%;
+  padding: 1.5em 0.7em;
+  border-radius: 6px;
+  border-color: #CC4156;
+}
