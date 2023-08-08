@@ -1,30 +1,54 @@
+import ProtectedRoute from "~/utils/protectedRoute"
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import Head from "next/head"
+
 import NavBar from "~/components/NavBar"
 import styles from "./dashboard.module.css"
-import Image from "next/image"
-import ProtectedRoute from "~/utils/protectedRoute"
+import useGetDatas, { type Item } from "~/api/useGetDatas"
+import Loading from "../loading"
 
 export default function DashBoard() {
+  const [items, setItems] = useState<Item[] | null>(null)
+  const { data, loading, error } = useGetDatas('http://127.0.0.1:8000/api/v1/item/')
+
+  useEffect(() => {
+    setItems(data)
+  }, [data])
+
+  if (loading) {
+    return (
+      <Loading />
+    )
+  }
+
   return (
     <ProtectedRoute>
       <div className={styles.container}>
+        <Head>
+          <title>MGA Market</title>
+        </Head>
         <NavBar />
         <main className={styles.containerMain}>
           <div>
-            <h1 className={styles.containerTitle}>Tableau de bord</h1>
+            <h1 className={styles.containerTitle}>Dernières nouveautés</h1>
             <div className={styles.containerProfile}>
-              <Image
-                width={250}
-                height={250}
-                src="/helene.png"
-                alt="helene" />
-              <div className={styles.profileText}>
-                <h2 className={styles.profileName}>Helene</h2>
-                <h2 className={styles.profileName}>Smith</h2>
-              </div>
-            </div>
-            <h2 className={styles.taskTitle}>Dernières taches</h2>
-            <div className={styles.taskCards}>
-
+              {items?.map(item => (
+                <div key={item.id} className={styles.card}>
+                  <a href={`item/${item.id}`}>
+                    <Image
+                      className={styles.cardImage}
+                      src={item.image}
+                      width={200}
+                      height={250}
+                      alt="Image item" />
+                    <div className={styles.cardDescrib}>
+                      <p className={styles.cardName}>{item.name}</p>
+                      <p className={styles.cardPrice}>{item.price}€</p>
+                    </div>
+                  </a>
+                </div>
+              ))}
             </div>
           </div>
         </main>
