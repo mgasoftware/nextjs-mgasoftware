@@ -19,10 +19,10 @@ export default function NavBar() {
                 <div className={styles.containerLink}>
                     <HomeIcon className={styles.icon} />
                     <Link href={"/dashboard"} className={styles.link}>
-                        <p className={styles.text}>Acceuil</p>
+                        <p className={styles.text}>Accueil</p>
                     </Link>
                 </div>
-                <div className={styles.containerLink}>
+                {/* <div className={styles.containerLink}>
                     <CalendarDaysIcon className={styles.icon} />
                     <Link href={"/"} className={styles.link}>
                         <p className={styles.text}>Calendrier</p>
@@ -39,7 +39,7 @@ export default function NavBar() {
                     <Link href={"/"} className={styles.link}>
                         <p className={styles.text}>Taches</p>
                     </Link>
-                </div>
+                </div> */}
                 <div className={styles.containerLink}>
                     <StopCircleIcon className={styles.icon} />
                     <button className={styles.link} onClick={(e) => void submitLogout(e)}>

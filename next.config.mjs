@@ -22,9 +22,9 @@ const config = {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: '127.0.0.1',
-        port: '8000',
+        protocol: 'https',
+        hostname: 'mgamarket-djangoapp.onrender.com',
+        port: '',
         pathname: '/media/items_images/**',
       },
     ],

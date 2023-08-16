@@ -34,7 +34,7 @@ const Home: NextPage = () => {
       password: password.current?.value
     }
     try {
-      const res = await axios.post('http://127.0.0.1:8000/api/login/', {
+      const res = await axios.post('https://mgamarket-djangoapp.onrender.com/api/login/', {
         username: username.current?.value,
         password: password.current?.value
       }, {
@@ -73,7 +73,7 @@ const Home: NextPage = () => {
       password2: password.current?.value
     }
     try {
-      const res = await axios.post('http://127.0.0.1:8000/api/register/', {
+      const res = await axios.post('https://mgamarket-djangoapp.onrender.com/api/register/', {
         username: username.current?.value,
         password: password.current?.value,
         password2: password.current?.value

@@ -8,23 +8,18 @@ import useGetDatas, { type Item } from "~/api/useGetDatas"
 import Loading from "../loading";
 import styles from "./item.module.css"
 
-export interface UserState {
-    token: string
-}
-
 export default function Item() {
     const router = useRouter()
     const query = router.query
-    // const { token } = useSelector((state: { user: UserState }) => state.user)
     const [item, setItem] = useState<Item[] | null>()
 
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    const { data, loading, error } = useGetDatas(`http://127.0.0.1:8000/api/v1/item/${query.itemId}`)
+    const { data, loading } = useGetDatas(`https://mgamarket-djangoapp.onrender.com/api/v1/item/${query.itemId}`)
 
     useEffect(() => {
         setItem(data)
-
-    }, [data])
+        console.log(item)
+    }, [data,item])
 
 
     if (loading) {

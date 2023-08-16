@@ -10,7 +10,7 @@ import Loading from "../loading"
 
 export default function DashBoard() {
   const [items, setItems] = useState<Item[] | null>(null)
-  const { data, loading, error } = useGetDatas('http://127.0.0.1:8000/api/v1/item/')
+  const { data, loading } = useGetDatas('https://mgamarket-djangoapp.onrender.com/api/v1/item/')
 
   useEffect(() => {
     setItems(data)
@@ -33,7 +33,7 @@ export default function DashBoard() {
           <div>
             <h1 className={styles.containerTitle}>Dernières nouveautés</h1>
             <div className={styles.containerProfile}>
-              {items?.map(item => (
+              {items?.reverse().map(item => (
                 <div key={item.id} className={styles.card}>
                   <a href={`item/${item.id}`}>
                     <Image
