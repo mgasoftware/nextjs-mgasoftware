@@ -11,7 +11,7 @@ import styles from "./item.module.css"
 export default function Item() {
     const { query } = useRouter();
     const itemId = query.itemId;
-    const [item, setItem] = useState<Item | null>()
+    const [item, setItem] = useState<Item | null>(null)
 
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     const { data, loading } = useGetDatas(`https://mgamarket-djangoapp.onrender.com/api/v1/item/${itemId}`)

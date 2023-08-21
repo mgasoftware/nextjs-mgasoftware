@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import endsWithNumber from '~/utils/endsWithNumber';
+
 export interface Item {
     id: number
     category: number
@@ -14,15 +16,16 @@ export interface Item {
 }
 
 export default function useGetDatas(url: string) {
-    const [data, setData] = useState<Item[] | null>(null);
+    const [data, setData] = useState<Item | null>(null);
+    const [datas, setDatas] = useState<Item[] | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         setLoading(true)
-
-        axios
-            .get<Item[]>(url)
+        if(endsWithNumber(url)) {
+            axios
+            .get<Item>(url)
             .then((response) => {
                 setData(response.data);
             })
@@ -38,6 +41,26 @@ export default function useGetDatas(url: string) {
             .finally(() => {
                 setLoading(false);
             })
+        }
+        else {
+            axios
+            .get<Item[]>(url)
+            .then((response) => {
+                setDatas(response.data);
+            })
+            .catch((error: string) => {
+                if (axios.isAxiosError(error)) {
+                    setError(`error message:  ${error.message}`);
+                    return error.message;
+                } else {
+                    setError(`unexpected error: , ${error}`);
+                    return 'An unexpected error occurred';
+                }
+            })
+            .finally(() => {
+                setLoading(false);
+            })
+        }
 
 
     }, [url]);

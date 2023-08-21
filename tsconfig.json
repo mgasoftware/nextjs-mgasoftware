@@ -28,6 +28,6 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs"
-, "src/store/loginSlice.ts"  ],
+, "src/store/loginSlice.ts", "src/pages/item/[itemId].tsx", "src/utils/checkValidForm.ts"  ],
   "exclude": ["node_modules"]
 }
