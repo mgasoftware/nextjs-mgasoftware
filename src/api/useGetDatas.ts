@@ -65,5 +65,5 @@ export default function useGetDatas(url: string) {
 
     }, [url]);
 
-    return { data, loading, error };
+    return { data, datas, loading, error };
 }

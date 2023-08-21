@@ -10,11 +10,11 @@ import Loading from "../loading"
 
 export default function DashBoard() {
   const [items, setItems] = useState<Item[] | null>(null)
-  const { data, loading } = useGetDatas('https://mgamarket-djangoapp.onrender.com/api/v1/item/')
+  const { datas, loading } = useGetDatas('https://mgamarket-djangoapp.onrender.com/api/v1/item/')
 
   useEffect(() => {
-    setItems(data)
-  }, [data])
+    setItems(datas)
+  }, [datas])
 
   if (loading) {
     return (
