@@ -33,11 +33,12 @@ export default function DashBoard() {
           <div>
             <h1 className={styles.containerTitle}>Dernières nouveautés</h1>
             <div className={styles.containerProfile}>
-              {items?.reverse().map(item => (
+              {items?.slice().reverse().map(item => (
                 <div key={item.id} className={styles.card}>
                   <a href={`item/${item.id}`}>
                     <Image
                       className={styles.cardImage}
+                      priority={true} 
                       src={item.image}
                       width={200}
                       height={250}

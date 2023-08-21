@@ -9,17 +9,16 @@ import Loading from "../loading";
 import styles from "./item.module.css"
 
 export default function Item() {
-    const router = useRouter()
-    const query = router.query
-    const [item, setItem] = useState<Item[] | null>()
+    const { query } = useRouter();
+    const itemId = query.itemId;
+    const [item, setItem] = useState<Item | null>()
 
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    const { data, loading } = useGetDatas(`https://mgamarket-djangoapp.onrender.com/api/v1/item/${query.itemId}`)
+    const { data, loading } = useGetDatas(`https://mgamarket-djangoapp.onrender.com/api/v1/item/${itemId}`)
 
     useEffect(() => {
-        setItem(data)
-        console.log(item)
-    }, [data,item])
+        setItem(data);
+    }, [data, item])
 
 
     if (loading) {
@@ -38,16 +37,20 @@ export default function Item() {
                 <h1 className={styles.containerTitle}>{item?.name}</h1>
                 <div className={styles.containerDesc}>
                     <div className={styles.containerImg}>
-                        <Image
-                            className={styles.img}
-                            src={item?.image}
-                            width={500}
-                            height={400}
-                            alt="Image item" />
+                        {item && (
+                            <Image
+                                className={styles.img}
+                                src={item.image}
+                                priority={true}
+                                width={500}
+                                height={400}
+                                alt={`Image de l'item ${item.name}`}
+                            />
+                        )}
                     </div>
                     <div className={styles.containerImg}>
-                        <p className={styles.description}><strong>Description:</strong> {item?.description}</p>
-                        <p className={styles.description}><strong>Prix:</strong> {item?.price}€</p>
+                        <p className={styles.description}><strong>Description:</strong> {item?.description ?? "N/A"}</p>
+                        <p className={styles.description}><strong>Prix:</strong> {item?.price ?? "N/A"}€</p>
                     </div>
                 </div>
             </main>

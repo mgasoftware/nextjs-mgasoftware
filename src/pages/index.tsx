@@ -25,7 +25,7 @@ const Home: NextPage = () => {
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state: { login: LoginState }) => state.login);
+  const { isLoading, error } = useSelector((state: { login: LoginState }) => state.login);
 
   const login = async () => {
     dispatch(loginPending())
@@ -121,7 +121,7 @@ const Home: NextPage = () => {
             <p className={styles.label}>Mot de Passe</p>
             <input type="password" name="username" className={styles.input} ref={password} />
             <p className={styles.label}>Vous n&apos;avez pas encore de compte ? <a onClick={() => setHaveAccount(false)} className={styles.link}>Créer votre compte</a></p>
-            {!isValidForm &&
+            {!isValidForm || error &&
               (<div className={styles.alertBanner}>
                 <div className={styles.alertContent}>
                   Tes identifiants sont incorrects. Réessaye.
@@ -140,6 +140,12 @@ const Home: NextPage = () => {
             <p className={styles.label}>Confirmez mot de passe</p>
             <input type="password" name="password2" className={styles.input} ref={password2} />
             <p className={styles.label}>Vous avez un compte ? <a onClick={() => setHaveAccount(true)} className={styles.link}>Identifiez-vous</a></p>
+            {error && 
+              (<div className={styles.alertBanner}>
+                <div className={styles.alertContent}>
+                  Erreur server veuillez réessayé plus tard
+                </div>
+              </div>)}
             {!isValidForm &&
               (<div className={styles.alertBanner}>
                 <div className={styles.alertContent}>
